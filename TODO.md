@@ -33,3 +33,13 @@ After Submission:
 2. Replace (Required) Written to asterix instead
 
 - 20-05-2026
+
+1. 2 Seperate Successful submission modals,
+- Only works with the "Are you dependent on your parents (Only one check)"
+    1. If No
+    2. If Yes
+
+
+Add More Art Centric Fields in the Form
+
+- 20-05-2026
