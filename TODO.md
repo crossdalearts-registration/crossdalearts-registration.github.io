@@ -28,3 +28,8 @@ After Submission:
 1. Join Whatsapp Channel (URL(button))
 
 - 20-05-2026
+
+1. Match the Join Whatsapp Channel Button Color to the Theme Red Color
+2. Replace (Required) Written to asterix instead
+
+- 20-05-2026
