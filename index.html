@@ -8,7 +8,13 @@
   <style>
     body.registration-page {
       padding-top: 28px;
-      background: linear-gradient(180deg, #fff8f7 0%, #f7f8fb 100%);
+      background-image:
+        linear-gradient(180deg, rgba(255, 248, 247, 0.78) 0%, rgba(247, 248, 251, 0.82) 100%),
+        url("Images/background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
       color: #121217;
     }
 
@@ -52,10 +58,24 @@
       line-height: 1.35;
     }
 
+    #registration-form label.full-span.single-line-question,
+    #registration-form label.full-span.single-line-question .single-line-question-text {
+      display: inline-block;
+      font-family: "Fraunces", serif !important;
+      font-weight: 700;
+      font-size: clamp(14px, 1.35vw, 16px);
+      line-height: 1.35;
+    }
+
     .form-row {
       display: grid;
       gap: 16px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .form-row > label {
+      font-family: "Fraunces", serif !important;
+      font-weight: 700;
     }
 
     .full-span {
@@ -470,7 +490,7 @@
           </select>
         </fieldset>
 
-        <label class="full-span">Where did you find us?
+        <label class="full-span single-line-question"><span class="single-line-question-text">Where did you find us?</span>
           <select name="foundUs" required>
             <option value="" selected disabled>Select one</option>
             <option value="Instagram">Instagram</option>
