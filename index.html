@@ -236,6 +236,7 @@
       -webkit-appearance: none;
       -moz-appearance: none;
       cursor: pointer;
+      color: #8a909f;
       padding-right: 44px;
       background-image:
         linear-gradient(45deg, transparent 50%, #1a1b21 50%),
@@ -250,6 +251,115 @@
         6px 6px,
         100% 100%;
       background-repeat: no-repeat;
+    }
+
+    #registration-form select:valid {
+      color: #171921;
+    }
+
+    .native-select-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      margin: -1px !important;
+      padding: 0 !important;
+      border: 0 !important;
+      clip: rect(0 0 0 0) !important;
+      overflow: hidden !important;
+      white-space: nowrap !important;
+    }
+
+    .custom-select {
+      position: relative;
+    }
+
+    .custom-select-trigger {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 6px;
+      padding: 12px 42px 12px 13px;
+      border: 1px solid #d7dbe5;
+      background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+      color: #8a909f;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+      font-size: 0.92rem;
+      line-height: 1.3;
+    }
+
+    .custom-select.has-value .custom-select-trigger {
+      color: #171921;
+    }
+
+    .custom-select-trigger::after {
+      content: "";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      width: 7px;
+      height: 7px;
+      border-right: 2px solid #1a1b21;
+      border-bottom: 2px solid #1a1b21;
+      transform: translateY(-65%) rotate(45deg);
+      transition: transform 0.2s ease;
+    }
+
+    .custom-select.is-open .custom-select-trigger::after {
+      transform: translateY(-35%) rotate(-135deg);
+    }
+
+    .custom-select-trigger:focus {
+      outline: 2px solid rgba(255, 66, 66, 0.22);
+      outline-offset: 1px;
+      border-color: rgba(255, 66, 66, 0.4);
+    }
+
+    .custom-select-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      display: none;
+      z-index: 35;
+      border: 1px solid #d7dbe5;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 6px;
+      box-shadow: 0 12px 26px rgba(24, 26, 33, 0.16);
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .custom-select.is-open .custom-select-menu {
+      display: block;
+    }
+
+    .custom-select-option {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      padding: 10px 11px;
+      border-radius: 10px;
+      color: #1f2230;
+      cursor: pointer;
+      font-size: 0.92rem;
+    }
+
+    .custom-select-option:hover {
+      background: #f5f7ff;
+    }
+
+    .custom-select-option.is-selected {
+      background: #edf1ff;
+      font-weight: 600;
+      color: #171921;
+    }
+
+    .custom-select-option.is-selected:hover {
+      background: #dce4ff;
+      color: #0f1322;
     }
 
     #registration-form {
@@ -383,18 +493,96 @@
     if (MENTOR_URL) mentorLink.href = MENTOR_URL;
     if (WHATSAPP_CHANNEL_URL) whatsappLink.href = WHATSAPP_CHANNEL_URL;
 
+    function closeAllCustomSelects(exceptEl) {
+      document.querySelectorAll(".custom-select.is-open").forEach((el) => {
+        if (el !== exceptEl) el.classList.remove("is-open");
+      });
+    }
+
+    function buildCustomSelect(select) {
+      const allOptions = Array.from(select.options);
+      const placeholderOption = allOptions.find((opt) => opt.value === "");
+      const placeholderText = placeholderOption ? placeholderOption.textContent : "Select one";
+      const optionItems = allOptions.filter((opt) => opt.value !== "");
+
+      select.dataset.required = String(select.required);
+      select.required = false;
+      select.classList.add("native-select-hidden");
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "custom-select";
+
+      const trigger = document.createElement("button");
+      trigger.type = "button";
+      trigger.className = "custom-select-trigger";
+      trigger.textContent = placeholderText;
+
+      const menu = document.createElement("div");
+      menu.className = "custom-select-menu";
+
+      optionItems.forEach((opt) => {
+        const optionButton = document.createElement("button");
+        optionButton.type = "button";
+        optionButton.className = "custom-select-option";
+        optionButton.textContent = opt.textContent;
+        optionButton.dataset.value = opt.value;
+
+        optionButton.addEventListener("click", () => {
+          select.value = opt.value;
+          trigger.textContent = opt.textContent;
+          wrapper.classList.add("has-value");
+          menu.querySelectorAll(".custom-select-option").forEach((btn) => btn.classList.remove("is-selected"));
+          optionButton.classList.add("is-selected");
+          wrapper.classList.remove("is-open");
+        });
+
+        menu.appendChild(optionButton);
+      });
+
+      select.parentNode.insertBefore(wrapper, select);
+      wrapper.appendChild(select);
+      wrapper.appendChild(trigger);
+      wrapper.appendChild(menu);
+
+      trigger.addEventListener("click", () => {
+        const open = !wrapper.classList.contains("is-open");
+        closeAllCustomSelects(wrapper);
+        if (open) wrapper.classList.add("is-open");
+      });
+    }
+
+    Array.from(form.querySelectorAll("select")).forEach(buildCustomSelect);
+
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".custom-select")) closeAllCustomSelects();
+    });
+
+    function resetCustomSelects() {
+      document.querySelectorAll(".custom-select").forEach((wrapper) => {
+        const select = wrapper.querySelector("select");
+        const placeholder = select.querySelector('option[value=""]')?.textContent || "Select one";
+        const trigger = wrapper.querySelector(".custom-select-trigger");
+        if (trigger) trigger.textContent = placeholder;
+        wrapper.classList.remove("has-value", "is-open");
+        wrapper.querySelectorAll(".custom-select-option").forEach((btn) => btn.classList.remove("is-selected"));
+      });
+    }
+
     function setStatus(message, type) {
       statusEl.textContent = message;
       statusEl.className = `status ${type || ""}`.trim();
     }
 
-    async function submitToAppsScript(payload) {
+    async function submitToAppsScript(formData) {
       if (!APP_SCRIPT_URL) return { ok: true, skipped: true };
 
-      const body = new URLSearchParams(payload).toString();
+      const body = new URLSearchParams(formData).toString();
       const response = await fetch(APP_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        },
         body
       });
 
@@ -409,16 +597,29 @@
         return;
       }
 
+      const firstMissingSelect = Array.from(form.querySelectorAll("select")).find(
+        (select) => select.dataset.required === "true" && !select.value
+      );
+      if (firstMissingSelect) {
+        const wrapper = firstMissingSelect.closest(".custom-select");
+        closeAllCustomSelects();
+        if (wrapper) {
+          wrapper.classList.add("is-open");
+          wrapper.querySelector(".custom-select-trigger")?.focus();
+        }
+        setStatus("Please choose an option in all dropdown fields.", "error");
+        return;
+      }
+
       setStatus("Submitting your details...", "");
       const submitBtn = form.querySelector('button[type="submit"]');
       submitBtn.disabled = true;
 
       const formData = new FormData(form);
-      const payload = Object.fromEntries(formData.entries());
-      payload.submittedAt = new Date().toISOString();
+      formData.append("submittedAt", new Date().toISOString());
 
       try {
-        const result = await submitToAppsScript(payload);
+        const result = await submitToAppsScript(formData);
 
         if (!result.ok) {
           throw new Error("Submission failed.");
@@ -426,6 +627,7 @@
 
         setStatus("Form submitted successfully.", "success");
         form.reset();
+        resetCustomSelects();
         successModal.classList.add("is-visible");
         successModal.setAttribute("aria-hidden", "false");
       } catch (error) {
