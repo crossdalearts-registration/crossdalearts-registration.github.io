@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CrossdaleArts Registration</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body.registration-page {
+      padding-top: 28px;
+      background: linear-gradient(180deg, #fff8f7 0%, #f7f8fb 100%);
+      color: #121217;
+    }
+
+    .registration-wrap {
+      width: min(50vw, 760px);
+      margin: 0 auto 56px;
+    }
+
+    .registration-card {
+      padding: var(--refresh-card-padding);
+      display: grid;
+      gap: 22px;
+    }
+
+    .registration-title {
+      font-family: "Fraunces", serif !important;
+      font-size: clamp(28px, 3.2vw, 38px);
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    .registration-intro {
+      margin: 0;
+      font-size: clamp(15px, 1.02vw, 17px);
+      line-height: 1.65;
+      color: #2b2d34;
+    }
+
+    .fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .question-label {
+      font-family: "Fraunces", serif !important;
+      font-weight: 700;
+      font-size: clamp(14px, 1.35vw, 16px);
+      line-height: 1.35;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .full-span {
+      grid-column: 1 / -1;
+    }
+
+    .consent-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+      padding: 10px 12px;
+      border: 1px solid rgba(18, 19, 26, 0.12);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(250, 250, 250, 0.82));
+    }
+
+    .consent-row input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      margin-top: 0;
+      border: 1.6px solid #1b1c22;
+      border-radius: 6px;
+      background: #fff;
+      display: inline-grid;
+      place-content: center;
+      cursor: pointer;
+      flex: 0 0 auto;
+      color: black;
+      transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .consent-row input[type="checkbox"]::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      transform: scale(0);
+      transition: transform 120ms ease-in-out;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+      background: transparent;
+    }
+
+    .consent-row input[type="checkbox"]:checked {
+      background: #ffffff;
+      border-color: #1b1c22;
+      color: #111111;
+    }
+
+    .consent-row input[type="checkbox"]:checked::before {
+      background: currentColor;
+      transform: scale(1);
+    }
+
+    .consent-row input[type="checkbox"]:focus-visible {
+      outline: 3px solid rgba(255, 66, 66, 0.22);
+      outline-offset: 2px;
+    }
+
+    .consent-row span {
+      text-align: left;
+      line-height: 1.45;
+      color: #1b1d24;
+    }
+
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .actions-row a,
+    .actions-row button {
+      flex: 1 1 220px;
+      text-align: center;
+      width: auto;
+    }
+
+    .status {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .status.error {
+      color: #b01818;
+    }
+
+    .status.success {
+      color: #0f5132;
+    }
+
+    #post-submit {
+      display: none;
+      gap: 10px;
+      align-items: start;
+    }
+
+    #post-submit.is-visible {
+      display: grid;
+    }
+
+    #registration-form label {
+      font-weight: 600;
+      color: #171921;
+      line-height: 1.35;
+    }
+
+    #registration-form input,
+    #registration-form select {
+      border-radius: 12px;
+      margin-top: 6px;
+      padding: 12px 13px;
+      border: 1px solid #d7dbe5;
+      background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+    }
+
+    .fieldset select {
+      font-size: 0.92rem;
+    }
+
+    #registration-form select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+      padding-right: 44px;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #1a1b21 50%),
+        linear-gradient(135deg, #1a1b21 50%, transparent 50%),
+        linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+      background-position:
+        calc(100% - 20px) calc(50% + 1px),
+        calc(100% - 14px) calc(50% + 1px),
+        0 0;
+      background-size:
+        6px 6px,
+        6px 6px,
+        100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    #registration-form {
+      gap: 16px;
+    }
+
+    #registration-form input:focus,
+    #registration-form select:focus {
+      outline: 2px solid rgba(255, 66, 66, 0.22);
+      outline-offset: 1px;
+      border-color: rgba(255, 66, 66, 0.4);
+    }
+
+    @media (max-width: 720px) {
+      .registration-wrap {
+        width: 95vw;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="registration-page">
+  <main class="registration-wrap">
+    <section class="surface-section registration-card">
+      <h1 class="registration-title">CrossdaleArts Registration Form</h1>
+      <p class="registration-intro">Fill all required details to continue. Once submitted successfully, you will get the WhatsApp channel join action.</p>
+
+      <form id="registration-form" class="feedback-form" novalidate>
+        <div class="form-row">
+          <label>Full Name (Required)
+            <input type="text" name="fullName" required autocomplete="name" />
+          </label>
+
+          <label>Phone No. (Required)
+            <input type="tel" name="phone" required inputmode="tel" autocomplete="tel" />
+          </label>
+
+          <label>Email (Required)
+            <input type="email" name="email" required autocomplete="email" />
+          </label>
+
+          <label>Instagram Handle (Required)
+            <input type="text" name="instagram" required autocomplete="off" placeholder="@yourhandle" />
+          </label>
+        </div>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Are you your own decision maker? (Required)</legend>
+          <select name="decisionMaker" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Are you dependent on your parents? (Required)</legend>
+          <select name="dependentOnParents" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Are you Indian or International? (Required)</legend>
+          <select name="region" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Indian">Indian</option>
+            <option value="International">International</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Are you excited to learn something new and make your own identity? (Required)</legend>
+          <select name="excitedToLearn" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </fieldset>
+
+        <label class="full-span">Where did you find us?
+          <select name="foundUs" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Other Social Media Platforms">Other social media platforms</option>
+            <option value="Mail">Mail</option>
+            <option value="Newsletter">Newsletter</option>
+          </select>
+        </label>
+
+        <label class="consent-row full-span">
+          <input type="checkbox" name="detailsConfirmed" required />
+          <span>All the details filled are correct and accurate.</span>
+        </label>
+
+        <div class="actions-row">
+          <a class="secondary-cta" id="mentor-link" href="#" target="_blank" rel="noopener noreferrer">Know Your Mentor</a>
+          <button type="submit" class="feedback-form-submit">Submit Form</button>
+        </div>
+
+        <p id="form-status" class="status" aria-live="polite"></p>
+      </form>
+
+      <section id="post-submit" class="surface-section">
+        <p class="status success">Submission successful. Please join the WhatsApp channel to continue.</p>
+        <a id="whatsapp-link" class="download-course-details-button" href="#" target="_blank" rel="noopener noreferrer">Join WhatsApp Channel</a>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    const APP_SCRIPT_URL = "";
+    const MENTOR_URL = "";
+    const WHATSAPP_CHANNEL_URL = "";
+
+    const form = document.getElementById("registration-form");
+    const statusEl = document.getElementById("form-status");
+    const postSubmit = document.getElementById("post-submit");
+    const mentorLink = document.getElementById("mentor-link");
+    const whatsappLink = document.getElementById("whatsapp-link");
+
+    if (MENTOR_URL) mentorLink.href = MENTOR_URL;
+    if (WHATSAPP_CHANNEL_URL) whatsappLink.href = WHATSAPP_CHANNEL_URL;
+
+    function setStatus(message, type) {
+      statusEl.textContent = message;
+      statusEl.className = `status ${type || ""}`.trim();
+    }
+
+    async function submitToAppsScript(payload) {
+      if (!APP_SCRIPT_URL) return { ok: true, skipped: true };
+
+      const response = await fetch(APP_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      return { ok: response.type === "opaque" || response.ok };
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) {
+        setStatus("Please complete all required fields before submitting.", "error");
+        return;
+      }
+
+      setStatus("Submitting your details...", "");
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+
+      const formData = new FormData(form);
+      const payload = Object.fromEntries(formData.entries());
+      payload.submittedAt = new Date().toISOString();
+
+      try {
+        const result = await submitToAppsScript(payload);
+
+        if (!result.ok) {
+          throw new Error("Submission failed.");
+        }
+
+        setStatus("Form submitted successfully.", "success");
+        form.reset();
+        postSubmit.classList.add("is-visible");
+      } catch (error) {
+        setStatus("Could not submit right now. Please try again.", "error");
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
