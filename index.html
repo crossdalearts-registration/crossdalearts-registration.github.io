@@ -150,14 +150,66 @@
       color: #0f5132;
     }
 
-    #post-submit {
+    .success-modal {
+      position: fixed;
+      inset: 0;
       display: none;
-      gap: 10px;
-      align-items: start;
+      align-items: center;
+      justify-content: center;
+      background: rgba(16, 18, 24, 0.58);
+      z-index: 1000;
+      padding: 18px;
     }
 
-    #post-submit.is-visible {
+    .success-modal.is-visible {
+      display: flex;
+    }
+
+    .success-modal-card {
+      width: min(92vw, 440px);
+      border-radius: 16px;
+      background: #ffffff;
+      border: 1px solid rgba(20, 22, 30, 0.12);
+      box-shadow: 0 18px 42px rgba(18, 20, 28, 0.28);
+      padding: 24px 18px 18px;
+      text-align: center;
       display: grid;
+      gap: 14px;
+    }
+
+    .success-modal-title {
+      margin: 0;
+      font-family: "Fraunces", serif !important;
+      font-size: clamp(22px, 2.4vw, 26px);
+      line-height: 1.2;
+      color: #171921;
+    }
+
+    .success-modal-text {
+      margin: 0;
+      color: #2a2d36;
+      line-height: 1.5;
+      font-size: 0.98rem;
+    }
+
+    .whatsapp-modal-btn {
+      display: block;
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #e53935 0%, #cc1f1f 100%);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 13px 16px;
+      line-height: 1.2;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: 0 8px 18px rgba(204, 31, 31, 0.3);
+    }
+
+    .whatsapp-modal-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 11px 22px rgba(204, 31, 31, 0.34);
     }
 
     #registration-form label {
@@ -306,21 +358,25 @@
         <p id="form-status" class="status" aria-live="polite"></p>
       </form>
 
-      <section id="post-submit" class="surface-section">
-        <p class="status success">Submission successful. Please join the WhatsApp channel to continue.</p>
-        <a id="whatsapp-link" class="download-course-details-button" href="#" target="_blank" rel="noopener noreferrer">Join WhatsApp Channel</a>
-      </section>
     </section>
   </main>
 
+  <section id="success-modal" class="success-modal" aria-hidden="true">
+    <div class="success-modal-card" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
+      <h2 id="success-modal-title" class="success-modal-title">Submission Successful</h2>
+      <p class="success-modal-text">Please join the WhatsApp channel to continue.</p>
+      <a id="whatsapp-link" class="whatsapp-modal-btn" href="#" target="_blank" rel="noopener noreferrer">Join WhatsApp Channel</a>
+    </div>
+  </section>
+
   <script>
-    const APP_SCRIPT_URL = "";
+    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyPbQRkQcRRM53P-LXL4bUMvYyTpzR0GXY32kD5OfsFtx6gy1UTWSeyU8ULE54j2r5Ncw/exec";
     const MENTOR_URL = "";
     const WHATSAPP_CHANNEL_URL = "";
 
     const form = document.getElementById("registration-form");
     const statusEl = document.getElementById("form-status");
-    const postSubmit = document.getElementById("post-submit");
+    const successModal = document.getElementById("success-modal");
     const mentorLink = document.getElementById("mentor-link");
     const whatsappLink = document.getElementById("whatsapp-link");
 
@@ -335,11 +391,11 @@
     async function submitToAppsScript(payload) {
       if (!APP_SCRIPT_URL) return { ok: true, skipped: true };
 
+      const body = new URLSearchParams(payload).toString();
       const response = await fetch(APP_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
+        body
       });
 
       return { ok: response.type === "opaque" || response.ok };
@@ -370,7 +426,8 @@
 
         setStatus("Form submitted successfully.", "success");
         form.reset();
-        postSubmit.classList.add("is-visible");
+        successModal.classList.add("is-visible");
+        successModal.setAttribute("aria-hidden", "false");
       } catch (error) {
         setStatus("Could not submit right now. Please try again.", "error");
       } finally {
