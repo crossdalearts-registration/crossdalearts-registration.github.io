@@ -53,3 +53,11 @@ Add Fields to the Google Sheets also
 Resequence all the old and new fields
 
 - 21-05-2026
+
+make the single line basic questions to same font-size of the drop down questions and bold also
+All Placeholder to fraunces (including the dropdown select one placeholder) and the last checkbox which says are every field filled correctly to the fraunces font also
+Submit button and know your mentor reverse column in small screens
+
+Indian should see select state in dropdown, and International should see Select Country from the dropdown
+
+- 21-05-2026
