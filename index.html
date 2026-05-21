@@ -154,17 +154,20 @@
 
     .actions-row {
       display: flex;
+      flex-direction: row;
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 6px;
+      width: 100%;
     }
 
     .actions-row a,
     .actions-row button {
-      flex: 1 1 0;
+      flex: 1 1 calc(50% - 6px);
       min-height: 48px;
       text-align: center;
-      width: auto;
+      width: 100%;
+      max-width: 100%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -506,7 +509,13 @@
       }
 
       .actions-row {
+        flex-wrap: nowrap;
         flex-direction: column-reverse;
+      }
+
+      .actions-row a,
+      .actions-row button {
+        flex: 1 1 100%;
       }
     }
   </style>
