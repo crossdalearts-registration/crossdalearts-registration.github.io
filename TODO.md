@@ -61,3 +61,7 @@ Submit button and know your mentor reverse column in small screens
 Indian should see select state in dropdown, and International should see Select Country from the dropdown
 
 - 21-05-2026
+
+Academic Qualification Field
+
+- 21-05-2026
