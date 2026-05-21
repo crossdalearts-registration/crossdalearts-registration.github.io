@@ -524,7 +524,7 @@
   <main class="registration-wrap">
     <section class="surface-section registration-card">
       <h1 class="registration-title">CrossdaleArts Registration Form</h1>
-      <p class="registration-intro">Fill all required details to continue. Once submitted successfully, you will get the WhatsApp channel join action.</p>
+      <p class="registration-intro">Fill all required details to continue. Once submitted successfully, you will be taken to the masterclass details page.</p>
 
       <form id="registration-form" class="feedback-form" novalidate>
         <div class="form-row">
@@ -532,8 +532,8 @@
             <input type="text" name="fullName" required autocomplete="name" placeholder="Enter your full name" />
           </label>
 
-          <label>Phone No. <span class="required-asterisk">*</span>
-            <input type="tel" name="phone" required inputmode="tel" autocomplete="tel" placeholder="Enter your phone number" />
+          <label>WhatsApp No. <span class="required-asterisk">*</span>
+            <input type="tel" name="whatsappNo" required inputmode="tel" autocomplete="tel" placeholder="Enter your WhatsApp number" />
           </label>
 
           <label>Email <span class="required-asterisk">*</span>
@@ -582,7 +582,7 @@
         </fieldset>
 
         <fieldset class="fieldset">
-          <legend class="question-label">Have you created original paintings from imagination? <span class="required-asterisk">*</span></legend>
+          <legend class="question-label">Have you ever created original paintings from imagination? <span class="required-asterisk">*</span></legend>
           <select name="originalPaintingByImagination" required>
             <option value="" selected disabled>Select one</option>
             <option value="Yes">Yes</option>
@@ -691,8 +691,8 @@
     <div class="success-modal-card" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
       <button id="success-modal-close" class="success-modal-close" type="button" aria-label="Close success modal">&times;</button>
       <h2 id="success-modal-title" class="success-modal-title">Submission Successful</h2>
-      <p class="success-modal-text">Please join the WhatsApp channel to continue.</p>
-      <a id="whatsapp-link" class="whatsapp-modal-btn" href="#" target="_blank" rel="noopener noreferrer">Join WhatsApp Channel</a>
+      <p class="success-modal-text">View the masterclass details to continue.</p>
+      <a id="whatsapp-link" class="whatsapp-modal-btn" href="https://crossdalearts.github.io/pages/masterclass.html">View Masterclass Details</a>
     </div>
   </section>
 
@@ -707,7 +707,7 @@
   <script>
     const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyPbQRkQcRRM53P-LXL4bUMvYyTpzR0GXY32kD5OfsFtx6gy1UTWSeyU8ULE54j2r5Ncw/exec";
     const MENTOR_URL = "Pages/my-story.html";
-    const WHATSAPP_CHANNEL_URL = "https://whatsapp.com/channel/0029VbCrPwZ1noz3UU03ra3C";
+    const WHATSAPP_CHANNEL_URL = "https://crossdalearts.github.io/pages/masterclass.html";
 
     const form = document.getElementById("registration-form");
     const statusEl = document.getElementById("form-status");
@@ -1016,6 +1016,9 @@
       openLoadingModal();
 
       const formData = new FormData(form);
+      if (formData.get("whatsappNo")) {
+        formData.set("phone", formData.get("whatsappNo"));
+      }
       const qualifiesAllThree = isYes(formData.get("decisionMaker"))
         && String(formData.get("dependentOnParents") || "").trim().toLowerCase() === "no"
         && String(formData.get("profession") || "").trim().toLowerCase() === "employed";
@@ -1035,7 +1038,7 @@
         const modalWhatsappBtn = document.getElementById("whatsapp-link");
         if (qualifiesAllThree) {
           if (modalTitle) modalTitle.textContent = "Submission Successful - Priority Journey";
-          if (modalText) modalText.textContent = "Great fit. Please join the WhatsApp channel for your next onboarding steps.";
+          if (modalText) modalText.textContent = "Great fit. View the masterclass details to continue.";
           if (modalWhatsappBtn) modalWhatsappBtn.classList.remove("hidden");
         } else {
           if (modalTitle) modalTitle.textContent = "Application Submitted";
