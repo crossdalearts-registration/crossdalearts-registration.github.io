@@ -187,6 +187,10 @@
       color: #0f5132;
     }
 
+    .conditional-hidden {
+      display: none;
+    }
+
     .success-modal {
       position: fixed;
       inset: 0;
@@ -203,15 +207,15 @@
     }
 
     .success-modal-card {
-      width: min(92vw, 440px);
-      border-radius: 16px;
+      width: min(92vw, 560px);
+      border-radius: 18px;
       background: #ffffff;
       border: 1px solid rgba(20, 22, 30, 0.12);
       box-shadow: 0 18px 42px rgba(18, 20, 28, 0.28);
-      padding: 24px 18px 18px;
+      padding: 30px 24px 24px;
       text-align: center;
       display: grid;
-      gap: 14px;
+      gap: 16px;
       position: relative;
     }
 
@@ -250,12 +254,39 @@
       box-shadow: 0 11px 22px rgba(255, 66, 66, 0.34);
     }
 
+    .hidden {
+      display: none !important;
+    }
+
+    .loading-modal-text {
+      margin: 0;
+      color: #2a2d36;
+      line-height: 1.5;
+      font-size: 0.97rem;
+    }
+
+    .loader {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 4px solid #f0f2f7;
+      border-top-color: var(--refresh-accent);
+      margin: 0 auto;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
     .success-modal-close {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      width: 30px;
-      height: 30px;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
       border: 1px solid #e4c8c8;
       border-radius: 8px;
       background: #fff7f7;
@@ -281,7 +312,8 @@
     }
 
     #registration-form input,
-    #registration-form select {
+    #registration-form select,
+    #registration-form textarea {
       border-radius: 12px;
       margin-top: 6px;
       padding: 12px 13px;
@@ -429,10 +461,20 @@
     }
 
     #registration-form input:focus,
-    #registration-form select:focus {
+    #registration-form select:focus,
+    #registration-form textarea:focus {
       outline: 2px solid rgba(255, 66, 66, 0.22);
       outline-offset: 1px;
       border-color: rgba(255, 66, 66, 0.4);
+    }
+
+    .auto-grow-textarea {
+      width: 100%;
+      resize: none;
+      overflow-y: hidden;
+      min-height: 46px;
+      line-height: 1.4;
+      font: inherit;
     }
 
     @media (max-width: 720px) {
@@ -466,10 +508,64 @@
             <input type="email" name="email" required autocomplete="email" placeholder="Enter your email address" />
           </label>
 
+          <label>Age <span class="required-asterisk">*</span>
+            <input type="number" name="age" required min="10" max="100" inputmode="numeric" autocomplete="off" placeholder="Enter your age" />
+          </label>
+
           <label>Instagram Handle <span class="required-asterisk">*</span>
             <input type="text" name="instagram" required autocomplete="off" placeholder="@yourhandle" />
           </label>
         </div>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">What is your current profession? <span class="required-asterisk">*</span></legend>
+          <select name="profession" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Employed">Employed</option>
+            <option value="Unemployed">Unemployed</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">How long have you been practicing art? <span class="required-asterisk">*</span></legend>
+          <select name="artistExperienceYears" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="1-2 Years">1-2 Years</option>
+            <option value="2-5 Years">2-5 Years</option>
+            <option value="5-10 Years">5-10 Years</option>
+            <option value="10+ Years">10+ Years</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Have you created original paintings from imagination? <span class="required-asterisk">*</span></legend>
+          <select name="originalPaintingByImagination" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Have you ever earned through your art? <span class="required-asterisk">*</span></legend>
+          <select name="earnedThroughArt" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </fieldset>
+
+        <fieldset id="earned-through-art-how-field" class="fieldset conditional-hidden" aria-hidden="true">
+          <legend class="question-label">How have you earned through your art? <span class="required-asterisk">*</span></legend>
+          <textarea
+            name="earnedThroughArtHow"
+            class="auto-grow-textarea"
+            data-conditional-required="true"
+            rows="1"
+            placeholder="Write how you have earned through your art"
+            autocomplete="off"
+          ></textarea>
+        </fieldset>
 
         <fieldset class="fieldset">
           <legend class="question-label">Are you your own decision maker? <span class="required-asterisk">*</span></legend>
@@ -542,6 +638,14 @@
     </div>
   </section>
 
+  <section id="loading-modal" class="success-modal" aria-hidden="true">
+    <div class="success-modal-card" role="dialog" aria-modal="true" aria-labelledby="loading-modal-title">
+      <h2 id="loading-modal-title" class="success-modal-title">Submitting Your Form</h2>
+      <div class="loader" aria-hidden="true"></div>
+      <p class="loading-modal-text">Please do not refresh the page or close this tab, as it may interrupt your form submission.</p>
+    </div>
+  </section>
+
   <script>
     const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyPbQRkQcRRM53P-LXL4bUMvYyTpzR0GXY32kD5OfsFtx6gy1UTWSeyU8ULE54j2r5Ncw/exec";
     const MENTOR_URL = "Pages/my-story.html";
@@ -550,6 +654,7 @@
     const form = document.getElementById("registration-form");
     const statusEl = document.getElementById("form-status");
     const successModal = document.getElementById("success-modal");
+    const loadingModal = document.getElementById("loading-modal");
     const successModalClose = document.getElementById("success-modal-close");
     const mentorLink = document.getElementById("mentor-link");
     const whatsappLink = document.getElementById("whatsapp-link");
@@ -593,6 +698,7 @@
 
         optionButton.addEventListener("click", () => {
           select.value = opt.value;
+          select.dispatchEvent(new Event("change", { bubbles: true }));
           trigger.textContent = opt.textContent;
           wrapper.classList.add("has-value");
           menu.querySelectorAll(".custom-select-option").forEach((btn) => btn.classList.remove("is-selected"));
@@ -642,6 +748,47 @@
       successModal.setAttribute("aria-hidden", "true");
     }
 
+    function openLoadingModal() {
+      loadingModal.classList.add("is-visible");
+      loadingModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeLoadingModal() {
+      loadingModal.classList.remove("is-visible");
+      loadingModal.setAttribute("aria-hidden", "true");
+    }
+
+    function resizeAutoGrowTextarea(textarea) {
+      if (!textarea) return;
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+
+    function isYes(value) {
+      return String(value || "").trim().toLowerCase() === "yes";
+    }
+
+    function updateEarnedThroughArtHowVisibility() {
+      const earnedSelect = form.querySelector('select[name="earnedThroughArt"]');
+      const howFieldset = document.getElementById("earned-through-art-how-field");
+      const howSelect = form.querySelector('textarea[name="earnedThroughArtHow"]');
+      const shouldShow = isYes(earnedSelect?.value);
+
+      if (shouldShow) {
+        howFieldset.classList.remove("conditional-hidden");
+        howFieldset.setAttribute("aria-hidden", "false");
+        if (howSelect) howSelect.dataset.required = "true";
+      } else {
+        howFieldset.classList.add("conditional-hidden");
+        howFieldset.setAttribute("aria-hidden", "true");
+        if (howSelect) {
+          howSelect.dataset.required = "false";
+          howSelect.value = "";
+          resizeAutoGrowTextarea(howSelect);
+        }
+      }
+    }
+
     async function submitToAppsScript(formData) {
       if (!APP_SCRIPT_URL) return { ok: true, skipped: true };
 
@@ -683,8 +830,13 @@
       setStatus("Submitting your details...", "");
       const submitBtn = form.querySelector('button[type="submit"]');
       submitBtn.disabled = true;
+      openLoadingModal();
 
       const formData = new FormData(form);
+      const qualifiesAllThree = isYes(formData.get("decisionMaker"))
+        && String(formData.get("dependentOnParents") || "").trim().toLowerCase() === "no"
+        && String(formData.get("profession") || "").trim().toLowerCase() === "employed";
+      formData.append("submissionJourneyType", qualifiesAllThree ? "All Three Yes" : "General");
       formData.append("submittedAt", new Date().toISOString());
 
       try {
@@ -695,16 +847,40 @@
         }
 
         setStatus("Form submitted successfully.", "success");
+        const modalTitle = document.getElementById("success-modal-title");
+        const modalText = successModal.querySelector(".success-modal-text");
+        const modalWhatsappBtn = document.getElementById("whatsapp-link");
+        if (qualifiesAllThree) {
+          if (modalTitle) modalTitle.textContent = "Submission Successful - Priority Journey";
+          if (modalText) modalText.textContent = "Great fit. Please join the WhatsApp channel for your next onboarding steps.";
+          if (modalWhatsappBtn) modalWhatsappBtn.classList.remove("hidden");
+        } else {
+          if (modalTitle) modalTitle.textContent = "Application Submitted";
+          if (modalText) modalText.textContent = "Thank you for your interest. We are sorry, but you are not eligible for this programme at the moment.";
+          if (modalWhatsappBtn) modalWhatsappBtn.classList.add("hidden");
+        }
         form.reset();
         resetCustomSelects();
+        updateEarnedThroughArtHowVisibility();
+        closeLoadingModal();
         successModal.classList.add("is-visible");
         successModal.setAttribute("aria-hidden", "false");
       } catch (error) {
+        closeLoadingModal();
         setStatus("Could not submit right now. Please try again.", "error");
       } finally {
+        closeLoadingModal();
         submitBtn.disabled = false;
       }
     });
+
+    form.querySelector('select[name="earnedThroughArt"]')?.addEventListener("change", updateEarnedThroughArtHowVisibility);
+    const earnedHowTextarea = form.querySelector('textarea[name="earnedThroughArtHow"]');
+    if (earnedHowTextarea) {
+      earnedHowTextarea.addEventListener("input", () => resizeAutoGrowTextarea(earnedHowTextarea));
+      resizeAutoGrowTextarea(earnedHowTextarea);
+    }
+    updateEarnedThroughArtHowVisibility();
 
     successModalClose.addEventListener("click", closeSuccessModal);
   </script>

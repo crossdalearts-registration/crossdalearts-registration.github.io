@@ -34,12 +34,22 @@ After Submission:
 
 - 20-05-2026
 
+placeholders font matching to the yes/no dropdown placeholder
+
 1. 2 Seperate Successful submission modals,
-- Only works with the "Are you dependent on your parents (Only one check)"
-    1. If No
-    2. If Yes
+- Only works with the "Are you dependent on your parents (Only one check), decision maker, Employed"
+    1. If No (All others)
+    2. If Yes (All three)
 
 
 Add More Art Centric Fields in the Form
+    1. you are Artist from how many years (1-2, 2-5, 5-10, 10+) Years
+    2. Have you ever tried to make original painting by imagination? (Yes, No)
+    3. Have you ever earned through your art (Next field only visible when yes (asking How? {Selling, Competition, Teaching, etc.}))
+    4. Profession (Employed, Unemployed)
+    5. Age? {What is your age}
 
-- 20-05-2026
+Add Fields to the Google Sheets also
+Resequence all the old and new fields
+
+- 21-05-2026
