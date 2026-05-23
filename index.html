@@ -555,6 +555,7 @@
             <option value="" selected disabled>Select one</option>
             <option value="Employed">Employed</option>
             <option value="Unemployed">Unemployed</option>
+            <option value="Homemaker">Homemaker</option>
           </select>
         </fieldset>
 
@@ -1015,18 +1016,41 @@
       submitBtn.disabled = true;
       openLoadingModal();
 
-      const formData = new FormData(form);
-      if (formData.get("whatsappNo")) {
-        formData.set("phone", formData.get("whatsappNo"));
-      }
-      const qualifiesAllThree = isYes(formData.get("decisionMaker"))
-        && String(formData.get("dependentOnParents") || "").trim().toLowerCase() === "no"
-        && String(formData.get("profession") || "").trim().toLowerCase() === "employed";
-      formData.append("submissionJourneyType", qualifiesAllThree ? "All Three Yes" : "General");
-      formData.append("submittedAt", new Date().toISOString());
+      const sourceData = new FormData(form);
+      const getValue = (key) => String(sourceData.get(key) ?? "").trim();
+      const payload = new FormData();
+      const formKeys = [
+        "fullName",
+        "whatsappNo",
+        "email",
+        "age",
+        "instagram",
+        "profession",
+        "academicQualification",
+        "artistExperienceYears",
+        "originalPaintingByImagination",
+        "earnedThroughArt",
+        "earnedThroughArtHow",
+        "decisionMaker",
+        "dependentOnParents",
+        "region",
+        "stateInIndia",
+        "countryInternational",
+        "excitedToLearn",
+        "foundUs",
+        "detailsConfirmed"
+      ];
+      formKeys.forEach((key) => payload.set(key, getValue(key)));
+      payload.set("phone", getValue("whatsappNo"));
+
+      const qualifiesEligibility = isYes(getValue("decisionMaker"))
+        && String(getValue("dependentOnParents")).toLowerCase() === "no";
+      payload.set("submissionJourneyType", qualifiesEligibility ? "Eligible" : "General");
+      payload.set("eligibilityStatus", qualifiesEligibility ? "Eligible" : "Non Eligible");
+      payload.set("submittedAt", new Date().toISOString());
 
       try {
-        const result = await submitToAppsScript(formData);
+        const result = await submitToAppsScript(payload);
 
         if (!result.ok) {
           throw new Error("Submission failed.");
@@ -1036,7 +1060,7 @@
         const modalTitle = document.getElementById("success-modal-title");
         const modalText = successModal.querySelector(".success-modal-text");
         const modalWhatsappBtn = document.getElementById("whatsapp-link");
-        if (qualifiesAllThree) {
+        if (qualifiesEligibility) {
           if (modalTitle) modalTitle.textContent = "Submission Successful - Priority Journey";
           if (modalText) modalText.textContent = "Great fit. View the masterclass details to continue.";
           if (modalWhatsappBtn) modalWhatsappBtn.classList.remove("hidden");
