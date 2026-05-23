@@ -265,6 +265,28 @@
       box-shadow: 0 11px 22px rgba(255, 66, 66, 0.34);
     }
 
+    .whatsapp-modal-btn.secondary {
+      background: #ffffff;
+      color: var(--refresh-accent);
+      border: 1px solid #f0b4b4;
+      box-shadow: 0 5px 14px rgba(23, 25, 33, 0.08);
+    }
+
+    .whatsapp-modal-btn.secondary:hover {
+      box-shadow: 0 8px 18px rgba(23, 25, 33, 0.12);
+    }
+
+    .success-modal-note {
+      margin: 2px 0 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #5a2f2f;
+      background: #fff4f4;
+      border: 1px solid #f2d9d9;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
     .hidden {
       display: none !important;
     }
@@ -693,7 +715,9 @@
       <button id="success-modal-close" class="success-modal-close" type="button" aria-label="Close success modal">&times;</button>
       <h2 id="success-modal-title" class="success-modal-title">Submission Successful</h2>
       <p class="success-modal-text">View the masterclass details to continue.</p>
-      <a id="whatsapp-link" class="whatsapp-modal-btn" href="https://crossdalearts.github.io/pages/masterclass.html">View Masterclass Details</a>
+      <p id="success-modal-note" class="success-modal-note">It is necessary to join the WhatsApp channel because every notification is going to come in the channel.</p>
+      <a id="masterclass-link" class="whatsapp-modal-btn" href="https://crossdalearts.github.io/pages/masterclass.html" target="_blank" rel="noopener noreferrer">View Masterclass Details</a>
+      <a id="whatsapp-channel-link" class="whatsapp-modal-btn secondary" href="https://whatsapp.com/channel/your-channel-link" target="_blank" rel="noopener noreferrer">Join WhatsApp Channel</a>
     </div>
   </section>
 
@@ -708,7 +732,8 @@
   <script>
     const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzPKGxQfazn8rHqsySNKVIGB_ANnDgJKXz3EK4Gq9lsCOR_9qo_8lV2LGfdwRZBifq4A/exec";
     const MENTOR_URL = "Pages/my-story.html";
-    const WHATSAPP_CHANNEL_URL = "https://crossdalearts.github.io/pages/masterclass.html";
+    const MASTERCLASS_DETAILS_URL = "https://crossdalearts.github.io/pages/masterclass.html";
+    const WHATSAPP_CHANNEL_URL = "https://whatsapp.com/channel/0029VbCrPwZ1noz3UU03ra3C";
 
     const form = document.getElementById("registration-form");
     const statusEl = document.getElementById("form-status");
@@ -716,10 +741,13 @@
     const loadingModal = document.getElementById("loading-modal");
     const successModalClose = document.getElementById("success-modal-close");
     const mentorLink = document.getElementById("mentor-link");
-    const whatsappLink = document.getElementById("whatsapp-link");
+    const masterclassLink = document.getElementById("masterclass-link");
+    const whatsappChannelLink = document.getElementById("whatsapp-channel-link");
+    const successModalNote = document.getElementById("success-modal-note");
 
     if (MENTOR_URL) mentorLink.href = MENTOR_URL;
-    if (WHATSAPP_CHANNEL_URL) whatsappLink.href = WHATSAPP_CHANNEL_URL;
+    if (MASTERCLASS_DETAILS_URL) masterclassLink.href = MASTERCLASS_DETAILS_URL;
+    if (WHATSAPP_CHANNEL_URL) whatsappChannelLink.href = WHATSAPP_CHANNEL_URL;
 
     const INDIA_STATES_AND_UTS = [
       "Andaman and Nicobar Islands",
@@ -1059,15 +1087,18 @@
         setStatus("Form submitted successfully.", "success");
         const modalTitle = document.getElementById("success-modal-title");
         const modalText = successModal.querySelector(".success-modal-text");
-        const modalWhatsappBtn = document.getElementById("whatsapp-link");
         if (qualifiesEligibility) {
           if (modalTitle) modalTitle.textContent = "Submission Successful";
           if (modalText) modalText.textContent = "Great fit. View the masterclass details to continue.";
-          if (modalWhatsappBtn) modalWhatsappBtn.classList.remove("hidden");
+          if (masterclassLink) masterclassLink.classList.remove("hidden");
+          if (whatsappChannelLink) whatsappChannelLink.classList.remove("hidden");
+          if (successModalNote) successModalNote.classList.remove("hidden");
         } else {
           if (modalTitle) modalTitle.textContent = "Application Submitted";
           if (modalText) modalText.textContent = "Thank you for your interest. We are sorry, but you are not eligible for this programme at the moment.";
-          if (modalWhatsappBtn) modalWhatsappBtn.classList.add("hidden");
+          if (masterclassLink) masterclassLink.classList.add("hidden");
+          if (whatsappChannelLink) whatsappChannelLink.classList.add("hidden");
+          if (successModalNote) successModalNote.classList.add("hidden");
         }
         form.reset();
         resetCustomSelects();
