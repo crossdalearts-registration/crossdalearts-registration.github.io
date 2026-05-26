@@ -744,6 +744,7 @@
     const masterclassLink = document.getElementById("masterclass-link");
     const whatsappChannelLink = document.getElementById("whatsapp-channel-link");
     const successModalNote = document.getElementById("success-modal-note");
+    const AUTO_WHATSAPP_OPEN_DELAY_MS = 1000;
 
     if (MENTOR_URL) mentorLink.href = MENTOR_URL;
     if (MASTERCLASS_DETAILS_URL) masterclassLink.href = MASTERCLASS_DETAILS_URL;
@@ -929,6 +930,12 @@
       loadingModal.setAttribute("aria-hidden", "true");
     }
 
+    function openWhatsAppChannelAfterDelay() {
+      window.setTimeout(() => {
+        window.location.href = WHATSAPP_CHANNEL_URL;
+      }, AUTO_WHATSAPP_OPEN_DELAY_MS);
+    }
+
     function resizeAutoGrowTextarea(textarea) {
       if (!textarea) return;
       textarea.style.height = "auto";
@@ -1092,6 +1099,7 @@
           if (masterclassLink) masterclassLink.classList.remove("hidden");
           if (whatsappChannelLink) whatsappChannelLink.classList.remove("hidden");
           if (successModalNote) successModalNote.classList.remove("hidden");
+          openWhatsAppChannelAfterDelay();
         } else {
           if (modalTitle) modalTitle.textContent = "Application Submitted";
           if (modalText) modalText.textContent = "Thank you for your interest. We are sorry, but you are not eligible for this programme at the moment.";
