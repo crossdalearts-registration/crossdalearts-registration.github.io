@@ -1071,8 +1071,7 @@
       formKeys.forEach((key) => payload.set(key, getValue(key)));
       payload.set("phone", getValue("whatsappNo"));
 
-      const qualifiesEligibility = isYes(getValue("decisionMaker"))
-        && String(getValue("dependentOnParents")).toLowerCase() === "no";
+      const qualifiesEligibility = isYes(getValue("decisionMaker"));
       payload.set("submissionJourneyType", qualifiesEligibility ? "Eligible" : "General");
       payload.set("eligibilityStatus", qualifiesEligibility ? "Eligible" : "Non Eligible");
       payload.set("submittedAt", new Date().toISOString());
