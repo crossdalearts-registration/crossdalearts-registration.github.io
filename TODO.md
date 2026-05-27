@@ -73,3 +73,7 @@ and update all the form fields in the googls sheets
 eligibility: decision maker, non-dependent on parents
 
 - 23-05-2026
+
+1. add some questions like... "are you learned or a self taught artist?" *{after ad}
+
+- 26-05-2026
