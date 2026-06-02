@@ -77,3 +77,11 @@ eligibility: decision maker, non-dependent on parents
 1. add some questions like... "are you learned or a self taught artist?" *{after ad}
 
 - 26-05-2026
+
+##Lead Campaign Packup and Cleanup
+
+1. Wire Masterclass page with the form in front
+2. Check all wiring
+3. Publish the last change
+
+- 02-06-2026
