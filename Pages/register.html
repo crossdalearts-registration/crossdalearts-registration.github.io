@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HWXZP02GBD"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-HWXZP02GBD');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Masterclass Registration - CrossdaleArts</title>
+  <link rel="icon" type="image/x-icon" href="/Images/logo.ico" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    body.registration-page {
+      padding-top: 28px;
+      /* background-image:
+        linear-gradient(180deg, rgba(255, 248, 247, 0.78) 0%, rgba(247, 248, 251, 0.82) 100%),
+        url("Images/background.jpg"); */
+      background-image:
+        linear-gradient(180deg, rgba(8, 8, 7, 0.527) 0%, rgba(0, 0, 0, 0.522) 100%),
+        url("/Images/background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #121217;
+    }
+
+    .registration-wrap {
+      width: min(50vw, 760px);
+      margin: 0 auto 56px;
+    }
+
+    .registration-card {
+      padding: var(--refresh-card-padding);
+      display: grid;
+      gap: 22px;
+    }
+
+    .registration-title {
+      font-family: "Fraunces", serif !important;
+      font-size: clamp(28px, 3.2vw, 38px);
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    .registration-intro {
+      margin: 0;
+      font-size: clamp(15px, 1.02vw, 17px);
+      line-height: 1.65;
+      color: #2b2d34;
+    }
+
+    .fieldset {
+      border: 0;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .question-label {
+      font-family: "Fraunces", serif !important;
+      font-weight: 700;
+      font-size: clamp(14px, 1.35vw, 16px);
+      line-height: 1.35;
+    }
+
+    .required-asterisk {
+      color: var(--refresh-accent);
+      font-weight: 800;
+    }
+
+    #registration-form label.full-span.single-line-question,
+    #registration-form label.full-span.single-line-question .single-line-question-text {
+      display: inline-block;
+      font-family: "Fraunces", serif !important;
+      font-weight: 700;
+      font-size: clamp(14px, 1.35vw, 16px);
+      line-height: 1.35;
+    }
+
+    .form-row {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .form-row > label {
+      font-family: "Fraunces", serif !important;
+      font-weight: 700;
+      font-size: clamp(14px, 1.35vw, 16px);
+      line-height: 1.35;
+    }
+
+    .full-span {
+      grid-column: 1 / -1;
+    }
+
+    .consent-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+      padding: 10px 12px;
+      border: 1px solid rgba(18, 19, 26, 0.12);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(250, 250, 250, 0.82));
+    }
+
+    .consent-row input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 18px;
+      height: 18px;
+      margin-top: 0;
+      border: 1.6px solid #1b1c22;
+      border-radius: 6px;
+      background: #fff;
+      display: inline-grid;
+      place-content: center;
+      cursor: pointer;
+      flex: 0 0 auto;
+      color: black;
+      transition: border-color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .consent-row input[type="checkbox"]::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      transform: scale(0);
+      transition: transform 120ms ease-in-out;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+      background: transparent;
+    }
+
+    .consent-row input[type="checkbox"]:checked {
+      background: #ffffff;
+      border-color: #1b1c22;
+      color: #111111;
+    }
+
+    .consent-row input[type="checkbox"]:checked::before {
+      background: currentColor;
+      transform: scale(1);
+    }
+
+    .consent-row input[type="checkbox"]:focus-visible {
+      outline: 3px solid rgba(255, 66, 66, 0.22);
+      outline-offset: 2px;
+    }
+
+    .consent-row span {
+      text-align: left;
+      line-height: 1.45;
+      color: #1b1d24;
+      font-family: "Fraunces", serif !important;
+      font-weight: 700;
+    }
+
+    .actions-row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+      width: 100%;
+    }
+
+    .actions-row a,
+    .actions-row button {
+      flex: 1 1 calc(50% - 6px);
+      min-height: 48px;
+      text-align: center;
+      width: 100%;
+      max-width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #mentor-link.feedback-form-submit:hover,
+    #mentor-link.feedback-form-submit:focus-visible {
+      text-shadow: none;
+    }
+
+    #mentor-link.feedback-form-submit {
+      background: #111111;
+      border-color: #111111;
+      color: #ffffff;
+    }
+
+    .status {
+      margin: 0;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .status.error {
+      color: #b01818;
+    }
+
+    .status.success {
+      color: #0f5132;
+    }
+
+    .conditional-hidden {
+      display: none;
+    }
+
+    .success-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(16, 18, 24, 0.58);
+      z-index: 1000;
+      padding: 18px;
+    }
+
+    .success-modal.is-visible {
+      display: flex;
+    }
+
+    .success-modal-card {
+      width: min(92vw, 560px);
+      border-radius: 18px;
+      background: #ffffff;
+      border: 1px solid rgba(20, 22, 30, 0.12);
+      box-shadow: 0 18px 42px rgba(18, 20, 28, 0.28);
+      padding: 30px 24px 24px;
+      text-align: center;
+      display: grid;
+      gap: 16px;
+      position: relative;
+    }
+
+    .success-modal-title {
+      margin: 0;
+      font-family: "Fraunces", serif !important;
+      font-size: clamp(22px, 2.4vw, 26px);
+      line-height: 1.2;
+      color: #171921;
+    }
+
+    .success-modal-text {
+      margin: 0;
+      color: #2a2d36;
+      line-height: 1.5;
+      font-size: 0.98rem;
+    }
+
+    .whatsapp-modal-btn {
+      display: block;
+      width: 100%;
+      border: 0;
+      border-radius: 12px;
+      background: var(--refresh-accent);
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 700;
+      padding: 13px 16px;
+      line-height: 1.2;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: 0 8px 18px rgba(255, 66, 66, 0.3);
+    }
+
+    .whatsapp-modal-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 11px 22px rgba(255, 66, 66, 0.34);
+    }
+
+    .whatsapp-modal-btn.secondary {
+      background: #ffffff;
+      color: var(--refresh-accent);
+      border: 1px solid #f0b4b4;
+      box-shadow: 0 5px 14px rgba(23, 25, 33, 0.08);
+    }
+
+    .whatsapp-modal-btn.secondary:hover {
+      box-shadow: 0 8px 18px rgba(23, 25, 33, 0.12);
+    }
+
+    .success-modal-note {
+      margin: 2px 0 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #5a2f2f;
+      background: #fff4f4;
+      border: 1px solid #f2d9d9;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .loading-modal-text {
+      margin: 0;
+      color: #2a2d36;
+      line-height: 1.5;
+      font-size: 0.97rem;
+    }
+
+    .loader {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 4px solid #f0f2f7;
+      border-top-color: var(--refresh-accent);
+      margin: 0 auto;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .success-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 34px;
+      height: 34px;
+      border: 1px solid #e4c8c8;
+      border-radius: 8px;
+      background: #fff7f7;
+      color: #8d4f4f;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-grid;
+      place-items: center;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .success-modal-close:hover {
+      background: #fbeaea;
+      color: #713535;
+      border-color: #d7abab;
+    }
+
+    #registration-form label {
+      font-weight: 600;
+      color: #171921;
+      line-height: 1.35;
+    }
+
+    #registration-form input,
+    #registration-form select,
+    #registration-form textarea {
+      border-radius: 12px;
+      margin-top: 6px;
+      padding: 12px 13px;
+      border: 1px solid #d7dbe5;
+      background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+      font-family: "Fraunces", serif !important;
+    }
+
+    #registration-form input::placeholder,
+    #registration-form textarea::placeholder {
+      font-family: "Fraunces", serif !important;
+      color: #8a909f;
+      opacity: 1;
+    }
+
+    .fieldset select {
+      font-size: 0.92rem;
+    }
+
+    #registration-form select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      cursor: pointer;
+      color: #8a909f;
+      padding-right: 44px;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #1a1b21 50%),
+        linear-gradient(135deg, #1a1b21 50%, transparent 50%),
+        linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+      background-position:
+        calc(100% - 20px) calc(50% + 1px),
+        calc(100% - 14px) calc(50% + 1px),
+        0 0;
+      background-size:
+        6px 6px,
+        6px 6px,
+        100% 100%;
+      background-repeat: no-repeat;
+    }
+
+    #registration-form select:valid {
+      color: #171921;
+    }
+
+    .native-select-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      margin: -1px !important;
+      padding: 0 !important;
+      border: 0 !important;
+      clip: rect(0 0 0 0) !important;
+      overflow: hidden !important;
+      white-space: nowrap !important;
+    }
+
+    .custom-select {
+      position: relative;
+    }
+
+    .custom-select-trigger {
+      width: 100%;
+      border-radius: 12px;
+      margin-top: 6px;
+      padding: 12px 42px 12px 13px;
+      border: 1px solid #d7dbe5;
+      background: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+      color: #8a909f;
+      text-align: left;
+      cursor: pointer;
+      position: relative;
+      font-size: 0.92rem;
+      line-height: 1.3;
+      font-family: "Fraunces", serif !important;
+      font-weight: 500;
+    }
+
+    .custom-select.has-value .custom-select-trigger {
+      color: #171921;
+    }
+
+    .custom-select-trigger::after {
+      content: "";
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      width: 7px;
+      height: 7px;
+      border-right: 2px solid #1a1b21;
+      border-bottom: 2px solid #1a1b21;
+      transform: translateY(-65%) rotate(45deg);
+      transition: transform 0.2s ease;
+    }
+
+    .custom-select.is-open .custom-select-trigger::after {
+      transform: translateY(-35%) rotate(-135deg);
+    }
+
+    .custom-select-trigger:focus {
+      outline: 2px solid rgba(255, 66, 66, 0.22);
+      outline-offset: 1px;
+      border-color: rgba(255, 66, 66, 0.4);
+    }
+
+    .custom-select-menu {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      display: none;
+      z-index: 35;
+      border: 1px solid #d7dbe5;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 6px;
+      box-shadow: 0 12px 26px rgba(24, 26, 33, 0.16);
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .custom-select.is-open .custom-select-menu {
+      display: block;
+    }
+
+    .custom-select-option {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      padding: 10px 11px;
+      border-radius: 10px;
+      color: #1f2230;
+      cursor: pointer;
+      font-size: 0.92rem;
+      font-family: "Fraunces", serif !important;
+    }
+
+    .custom-select-option:hover {
+      background: #f5f7ff;
+    }
+
+    .custom-select-option.is-selected {
+      background: #edf1ff;
+      font-weight: 600;
+      color: #171921;
+    }
+
+    .custom-select-option.is-selected:hover {
+      background: #dce4ff;
+      color: #0f1322;
+    }
+
+    #registration-form {
+      gap: 16px;
+    }
+
+    #registration-form input:focus,
+    #registration-form select:focus,
+    #registration-form textarea:focus {
+      outline: 2px solid rgba(255, 66, 66, 0.22);
+      outline-offset: 1px;
+      border-color: rgba(255, 66, 66, 0.4);
+    }
+
+    .auto-grow-textarea {
+      width: 100%;
+      resize: none;
+      overflow-y: hidden;
+      min-height: 46px;
+      line-height: 1.4;
+      font: inherit;
+    }
+
+    @media (max-width: 720px) {
+      .registration-wrap {
+        width: 95vw;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .actions-row {
+        flex-wrap: nowrap;
+        flex-direction: column-reverse;
+      }
+
+      .actions-row a,
+      .actions-row button {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body class="registration-page">
+  <main class="registration-wrap">
+    <section class="surface-section registration-card">
+      <h1 class="registration-title">CrossdaleArts Registration Form</h1>
+      <p class="registration-intro">Fill all required details to continue. Once submitted successfully, you will be taken to the masterclass details page.</p>
+
+      <form id="registration-form" class="feedback-form" novalidate>
+        <div class="form-row">
+          <label>Full Name <span class="required-asterisk">*</span>
+            <input type="text" name="fullName" required autocomplete="name" placeholder="Enter your full name" />
+          </label>
+
+          <label>WhatsApp No. <span class="required-asterisk">*</span>
+            <input type="tel" name="whatsappNo" required inputmode="tel" autocomplete="tel" placeholder="Enter your WhatsApp number" />
+          </label>
+
+          <label>Email <span class="required-asterisk">*</span>
+            <input type="email" name="email" required autocomplete="email" placeholder="Enter your email address" />
+          </label>
+
+          <label>Age <span class="required-asterisk">*</span>
+            <input type="number" name="age" required min="10" max="100" inputmode="numeric" autocomplete="off" placeholder="Enter your age" />
+          </label>
+
+          <label>Instagram Handle <span class="required-asterisk">*</span>
+            <input type="text" name="instagram" required autocomplete="off" placeholder="@yourhandle" />
+          </label>
+        </div>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">What is your current profession? <span class="required-asterisk">*</span></legend>
+          <select name="profession" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Employed">Employed / Freelancer</option>
+            <option value="Homemaker">Homemaker / Housewife</option>
+            <option value="Unemployed">Unemployed / Student</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">What is your academic qualification? <span class="required-asterisk">*</span></legend>
+          <select name="academicQualification" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="10th">10th</option>
+            <option value="12th">12th</option>
+            <option value="Graduate">Graduate</option>
+            <option value="Postgraduate">Postgraduate</option>
+            <option value="Other">Other</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">How long have you been practicing art? <span class="required-asterisk">*</span></legend>
+          <select name="artistExperienceYears" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="1-2 Years">1-2 Years</option>
+            <option value="2-5 Years">2-5 Years</option>
+            <option value="5-10 Years">5-10 Years</option>
+            <option value="10+ Years">10+ Years</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Have you ever created original paintings from imagination? <span class="required-asterisk">*</span></legend>
+          <select name="originalPaintingByImagination" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Have you ever earned through your art? <span class="required-asterisk">*</span></legend>
+          <select name="earnedThroughArt" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </fieldset>
+
+        <fieldset id="earned-through-art-how-field" class="fieldset conditional-hidden" aria-hidden="true">
+          <legend class="question-label">How have you earned through your art? <span class="required-asterisk">*</span></legend>
+          <textarea
+            name="earnedThroughArtHow"
+            class="auto-grow-textarea"
+            data-conditional-required="true"
+            rows="1"
+            placeholder="Write how you have earned through your art"
+            autocomplete="off"
+          ></textarea>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Are you your own decision maker? <span class="required-asterisk">*</span></legend>
+          <select name="decisionMaker" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Are you dependent on your parents? <span class="required-asterisk">*</span></legend>
+          <select name="dependentOnParents" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Are you Indian or International? <span class="required-asterisk">*</span></legend>
+          <select name="region" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Indian">Indian</option>
+            <option value="International">International</option>
+          </select>
+        </fieldset>
+
+        <fieldset id="indian-state-field" class="fieldset conditional-hidden" aria-hidden="true">
+          <legend class="question-label">Select State <span class="required-asterisk">*</span></legend>
+          <select name="stateInIndia" data-conditional-required="true">
+            <option value="" selected disabled>Select state</option>
+          </select>
+        </fieldset>
+
+        <fieldset id="international-country-field" class="fieldset conditional-hidden" aria-hidden="true">
+          <legend class="question-label">Select Country <span class="required-asterisk">*</span></legend>
+          <select name="countryInternational" data-conditional-required="true">
+            <option value="" selected disabled>Select country</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="question-label">Are you excited to learn something new and make your own identity? <span class="required-asterisk">*</span></legend>
+          <select name="excitedToLearn" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </fieldset>
+
+        <label class="full-span single-line-question"><span class="single-line-question-text">Where did you find us?</span>
+          <select name="foundUs" required>
+            <option value="" selected disabled>Select one</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Other Social Media Platforms">Other social media platforms</option>
+            <option value="Mail">Mail</option>
+            <option value="Newsletter">Newsletter</option>
+          </select>
+        </label>
+
+        <label class="consent-row full-span">
+          <input type="checkbox" name="detailsConfirmed" required />
+          <span>All the details filled are correct and accurate.</span>
+        </label>
+
+        <div class="actions-row">
+          <a class="feedback-form-submit" id="mentor-link" href="#" target="_blank" rel="noopener noreferrer">Know Your Mentor</a>
+          <button type="submit" class="feedback-form-submit">Submit</button>
+        </div>
+
+        <p id="form-status" class="status" aria-live="polite"></p>
+      </form>
+
+    </section>
+  </main>
+
+  <section id="success-modal" class="success-modal" aria-hidden="true">
+    <div class="success-modal-card" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
+      <button id="success-modal-close" class="success-modal-close" type="button" aria-label="Close success modal">&times;</button>
+      <h2 id="success-modal-title" class="success-modal-title">Submission Successful</h2>
+      <p class="success-modal-text">View the masterclass details to continue.</p>
+      <p id="success-modal-note" class="success-modal-note">It is necessary to join the WhatsApp channel because every notification is going to come in the channel.</p>
+      <a id="masterclass-link" class="whatsapp-modal-btn" href="https://crossdalearts.github.io/pages/masterclass.html" target="_blank" rel="noopener noreferrer">View Masterclass Details</a>
+      <a id="whatsapp-channel-link" class="whatsapp-modal-btn secondary" href="https://whatsapp.com/channel/your-channel-link" target="_blank" rel="noopener noreferrer">Join WhatsApp Channel</a>
+    </div>
+  </section>
+
+  <section id="loading-modal" class="success-modal" aria-hidden="true">
+    <div class="success-modal-card" role="dialog" aria-modal="true" aria-labelledby="loading-modal-title">
+      <h2 id="loading-modal-title" class="success-modal-title">Submitting Your Form</h2>
+      <div class="loader" aria-hidden="true"></div>
+      <p class="loading-modal-text">Please do not refresh the page or close this tab, as it may interrupt your form submission.</p>
+    </div>
+  </section>
+
+  <script>
+    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzPKGxQfazn8rHqsySNKVIGB_ANnDgJKXz3EK4Gq9lsCOR_9qo_8lV2LGfdwRZBifq4A/exec";
+    const MENTOR_URL = "/Pages/my-story.html";
+    const MASTERCLASS_DETAILS_URL = "https://crossdalearts.github.io/pages/masterclass.html";
+    const WHATSAPP_CHANNEL_URL = "https://whatsapp.com/channel/0029VbCrPwZ1noz3UU03ra3C";
+
+    const form = document.getElementById("registration-form");
+    const statusEl = document.getElementById("form-status");
+    const successModal = document.getElementById("success-modal");
+    const loadingModal = document.getElementById("loading-modal");
+    const successModalClose = document.getElementById("success-modal-close");
+    const mentorLink = document.getElementById("mentor-link");
+    const masterclassLink = document.getElementById("masterclass-link");
+    const whatsappChannelLink = document.getElementById("whatsapp-channel-link");
+    const successModalNote = document.getElementById("success-modal-note");
+    const AUTO_WHATSAPP_OPEN_DELAY_MS = 1000;
+
+    if (MENTOR_URL) mentorLink.href = MENTOR_URL;
+    if (MASTERCLASS_DETAILS_URL) masterclassLink.href = MASTERCLASS_DETAILS_URL;
+    if (WHATSAPP_CHANNEL_URL) whatsappChannelLink.href = WHATSAPP_CHANNEL_URL;
+
+    const INDIA_STATES_AND_UTS = [
+      "Andaman and Nicobar Islands",
+      "Andhra Pradesh",
+      "Arunachal Pradesh",
+      "Assam",
+      "Bihar",
+      "Chandigarh",
+      "Chhattisgarh",
+      "Dadra and Nagar Haveli and Daman and Diu",
+      "Delhi",
+      "Goa",
+      "Gujarat",
+      "Haryana",
+      "Himachal Pradesh",
+      "Jammu and Kashmir",
+      "Jharkhand",
+      "Karnataka",
+      "Kerala",
+      "Ladakh",
+      "Lakshadweep",
+      "Madhya Pradesh",
+      "Maharashtra",
+      "Manipur",
+      "Meghalaya",
+      "Mizoram",
+      "Nagaland",
+      "Odisha",
+      "Puducherry",
+      "Punjab",
+      "Rajasthan",
+      "Sikkim",
+      "Tamil Nadu",
+      "Telangana",
+      "Tripura",
+      "Uttar Pradesh",
+      "Uttarakhand",
+      "West Bengal"
+    ];
+
+    const COUNTRY_CODES = [
+      "AF","AL","DZ","AD","AO","AG","AR","AM","AU","AT","AZ","BS","BH","BD","BB","BY","BE","BZ","BJ","BT","BO","BA","BW","BR","BN","BG","BF","BI","CV","KH","CM","CA","CF","TD","CL","CN","CO","KM","CG","CR","CI","HR","CU","CY","CZ","CD","DK","DJ","DM","DO","EC","EG","SV","GQ","ER","EE","SZ","ET","FJ","FI","FR","GA","GM","GE","DE","GH","GR","GD","GT","GN","GW","GY","HT","HN","HU","IS","IN","ID","IR","IQ","IE","IL","IT","JM","JP","JO","KZ","KE","KI","KP","KR","KW","KG","LA","LV","LB","LS","LR","LY","LI","LT","LU","MG","MW","MY","MV","ML","MT","MH","MR","MU","MX","FM","MD","MC","MN","ME","MA","MZ","MM","NA","NR","NP","NL","NZ","NI","NE","NG","MK","NO","OM","PK","PW","PA","PG","PY","PE","PH","PL","PT","QA","RO","RU","RW","KN","LC","VC","WS","SM","ST","SA","SN","RS","SC","SL","SG","SK","SI","SB","SO","ZA","SS","ES","LK","SD","SR","SE","CH","SY","TJ","TZ","TH","TL","TG","TO","TT","TN","TR","TM","TV","UG","UA","AE","GB","US","UY","UZ","VU","VA","VE","VN","YE","ZM","ZW","PS","TW","XK"
+    ];
+
+    function getCountryNames() {
+      const displayNames = typeof Intl !== "undefined" && Intl.DisplayNames
+        ? new Intl.DisplayNames(["en"], { type: "region" })
+        : null;
+      const names = COUNTRY_CODES
+        .map((code) => (displayNames ? displayNames.of(code) : code))
+        .filter((name) => typeof name === "string" && name.trim().length > 0)
+        .filter((name) => name !== "XK");
+
+      if (!names.includes("Kosovo")) names.push("Kosovo");
+
+      return Array.from(new Set(names)).sort((a, b) => a.localeCompare(b));
+    }
+
+    function populateSelectOptions(selectEl, values) {
+      if (!selectEl) return;
+      const existingPlaceholder = selectEl.querySelector('option[value=""]');
+      const placeholderText = existingPlaceholder ? existingPlaceholder.textContent : "Select one";
+      selectEl.innerHTML = "";
+      const placeholder = document.createElement("option");
+      placeholder.value = "";
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      placeholder.textContent = placeholderText;
+      selectEl.appendChild(placeholder);
+
+      values.forEach((value) => {
+        const option = document.createElement("option");
+        option.value = value;
+        option.textContent = value;
+        selectEl.appendChild(option);
+      });
+    }
+
+    function closeAllCustomSelects(exceptEl) {
+      document.querySelectorAll(".custom-select.is-open").forEach((el) => {
+        if (el !== exceptEl) el.classList.remove("is-open");
+      });
+    }
+
+    function buildCustomSelect(select) {
+      const allOptions = Array.from(select.options);
+      const placeholderOption = allOptions.find((opt) => opt.value === "");
+      const placeholderText = placeholderOption ? placeholderOption.textContent : "Select one";
+      const optionItems = allOptions.filter((opt) => opt.value !== "");
+
+      select.dataset.required = String(select.required);
+      select.required = false;
+      select.classList.add("native-select-hidden");
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "custom-select";
+
+      const trigger = document.createElement("button");
+      trigger.type = "button";
+      trigger.className = "custom-select-trigger";
+      trigger.textContent = placeholderText;
+
+      const menu = document.createElement("div");
+      menu.className = "custom-select-menu";
+
+      optionItems.forEach((opt) => {
+        const optionButton = document.createElement("button");
+        optionButton.type = "button";
+        optionButton.className = "custom-select-option";
+        optionButton.textContent = opt.textContent;
+        optionButton.dataset.value = opt.value;
+
+        optionButton.addEventListener("click", () => {
+          select.value = opt.value;
+          select.dispatchEvent(new Event("change", { bubbles: true }));
+          trigger.textContent = opt.textContent;
+          wrapper.classList.add("has-value");
+          menu.querySelectorAll(".custom-select-option").forEach((btn) => btn.classList.remove("is-selected"));
+          optionButton.classList.add("is-selected");
+          wrapper.classList.remove("is-open");
+        });
+
+        menu.appendChild(optionButton);
+      });
+
+      select.parentNode.insertBefore(wrapper, select);
+      wrapper.appendChild(select);
+      wrapper.appendChild(trigger);
+      wrapper.appendChild(menu);
+
+      trigger.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        if (wrapper.classList.contains("is-open")) {
+          wrapper.classList.remove("is-open");
+          return;
+        }
+        closeAllCustomSelects(wrapper);
+        wrapper.classList.add("is-open");
+      });
+    }
+
+    populateSelectOptions(form.querySelector('select[name="stateInIndia"]'), INDIA_STATES_AND_UTS);
+    populateSelectOptions(form.querySelector('select[name="countryInternational"]'), getCountryNames());
+    Array.from(form.querySelectorAll("select")).forEach(buildCustomSelect);
+
+    document.addEventListener("click", (event) => {
+      if (!event.target.closest(".custom-select")) closeAllCustomSelects();
+    });
+
+    function resetCustomSelects() {
+      document.querySelectorAll(".custom-select").forEach((wrapper) => {
+        const select = wrapper.querySelector("select");
+        const placeholder = select.querySelector('option[value=""]')?.textContent || "Select one";
+        const trigger = wrapper.querySelector(".custom-select-trigger");
+        if (trigger) trigger.textContent = placeholder;
+        wrapper.classList.remove("has-value", "is-open");
+        wrapper.querySelectorAll(".custom-select-option").forEach((btn) => btn.classList.remove("is-selected"));
+      });
+    }
+
+    function setStatus(message, type) {
+      statusEl.textContent = message;
+      statusEl.className = `status ${type || ""}`.trim();
+    }
+
+    function closeSuccessModal() {
+      successModal.classList.remove("is-visible");
+      successModal.setAttribute("aria-hidden", "true");
+    }
+
+    function openLoadingModal() {
+      loadingModal.classList.add("is-visible");
+      loadingModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeLoadingModal() {
+      loadingModal.classList.remove("is-visible");
+      loadingModal.setAttribute("aria-hidden", "true");
+    }
+
+    function openWhatsAppChannelAfterDelay() {
+      window.setTimeout(() => {
+        window.location.href = WHATSAPP_CHANNEL_URL;
+      }, AUTO_WHATSAPP_OPEN_DELAY_MS);
+    }
+
+    function resizeAutoGrowTextarea(textarea) {
+      if (!textarea) return;
+      textarea.style.height = "auto";
+      textarea.style.height = `${textarea.scrollHeight}px`;
+    }
+
+    function isYes(value) {
+      return String(value || "").trim().toLowerCase() === "yes";
+    }
+
+    function updateEarnedThroughArtHowVisibility() {
+      const earnedSelect = form.querySelector('select[name="earnedThroughArt"]');
+      const howFieldset = document.getElementById("earned-through-art-how-field");
+      const howSelect = form.querySelector('textarea[name="earnedThroughArtHow"]');
+      const shouldShow = isYes(earnedSelect?.value);
+
+      if (shouldShow) {
+        howFieldset.classList.remove("conditional-hidden");
+        howFieldset.setAttribute("aria-hidden", "false");
+        if (howSelect) howSelect.dataset.required = "true";
+      } else {
+        howFieldset.classList.add("conditional-hidden");
+        howFieldset.setAttribute("aria-hidden", "true");
+        if (howSelect) {
+          howSelect.dataset.required = "false";
+          howSelect.value = "";
+          resizeAutoGrowTextarea(howSelect);
+        }
+      }
+    }
+
+    function resetConditionalCustomSelect(selectEl) {
+      if (!selectEl) return;
+      selectEl.value = "";
+      const wrapper = selectEl.closest(".custom-select");
+      if (!wrapper) return;
+      const trigger = wrapper.querySelector(".custom-select-trigger");
+      const placeholder = selectEl.querySelector('option[value=""]')?.textContent || "Select one";
+      if (trigger) trigger.textContent = placeholder;
+      wrapper.classList.remove("has-value", "is-open");
+      wrapper.querySelectorAll(".custom-select-option").forEach((btn) => btn.classList.remove("is-selected"));
+    }
+
+    function updateRegionConditionalVisibility() {
+      const regionValue = String(form.querySelector('select[name="region"]')?.value || "").trim().toLowerCase();
+      const indianField = document.getElementById("indian-state-field");
+      const internationalField = document.getElementById("international-country-field");
+      const stateSelect = form.querySelector('select[name="stateInIndia"]');
+      const countrySelect = form.querySelector('select[name="countryInternational"]');
+
+      const showIndian = regionValue === "indian";
+      const showInternational = regionValue === "international";
+
+      if (indianField) {
+        indianField.classList.toggle("conditional-hidden", !showIndian);
+        indianField.setAttribute("aria-hidden", String(!showIndian));
+      }
+      if (internationalField) {
+        internationalField.classList.toggle("conditional-hidden", !showInternational);
+        internationalField.setAttribute("aria-hidden", String(!showInternational));
+      }
+
+      if (stateSelect) {
+        stateSelect.dataset.required = showIndian ? "true" : "false";
+        if (!showIndian) resetConditionalCustomSelect(stateSelect);
+      }
+      if (countrySelect) {
+        countrySelect.dataset.required = showInternational ? "true" : "false";
+        if (!showInternational) resetConditionalCustomSelect(countrySelect);
+      }
+    }
+
+    async function submitToAppsScript(formData) {
+      if (!APP_SCRIPT_URL) return { ok: true, skipped: true };
+
+      const body = new URLSearchParams(formData).toString();
+      const response = await fetch(APP_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+        },
+        body
+      });
+
+      return { ok: response.type === "opaque" || response.ok };
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!form.reportValidity()) {
+        setStatus("Please complete all required fields before submitting.", "error");
+        return;
+      }
+
+      const firstMissingSelect = Array.from(form.querySelectorAll("select")).find(
+        (select) => select.dataset.required === "true" && !select.value
+      );
+      if (firstMissingSelect) {
+        const wrapper = firstMissingSelect.closest(".custom-select");
+        closeAllCustomSelects();
+        if (wrapper) {
+          wrapper.classList.add("is-open");
+          wrapper.querySelector(".custom-select-trigger")?.focus();
+        }
+        setStatus("Please choose an option in all dropdown fields.", "error");
+        return;
+      }
+
+      setStatus("Submitting your details...", "");
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      openLoadingModal();
+
+      const sourceData = new FormData(form);
+      const getValue = (key) => String(sourceData.get(key) ?? "").trim();
+      const payload = new FormData();
+      const formKeys = [
+        "fullName",
+        "whatsappNo",
+        "email",
+        "age",
+        "instagram",
+        "profession",
+        "academicQualification",
+        "artistExperienceYears",
+        "originalPaintingByImagination",
+        "earnedThroughArt",
+        "earnedThroughArtHow",
+        "decisionMaker",
+        "dependentOnParents",
+        "region",
+        "stateInIndia",
+        "countryInternational",
+        "excitedToLearn",
+        "foundUs",
+        "detailsConfirmed"
+      ];
+      formKeys.forEach((key) => payload.set(key, getValue(key)));
+      payload.set("phone", getValue("whatsappNo"));
+
+      const qualifiesEligibility = isYes(getValue("decisionMaker"));
+      payload.set("submissionJourneyType", qualifiesEligibility ? "Eligible" : "General");
+      payload.set("eligibilityStatus", qualifiesEligibility ? "Eligible" : "Non Eligible");
+      payload.set("submittedAt", new Date().toISOString());
+
+      try {
+        const result = await submitToAppsScript(payload);
+
+        if (!result.ok) {
+          throw new Error("Submission failed.");
+        }
+
+        setStatus("Form submitted successfully.", "success");
+        const modalTitle = document.getElementById("success-modal-title");
+        const modalText = successModal.querySelector(".success-modal-text");
+        if (qualifiesEligibility) {
+          if (modalTitle) modalTitle.textContent = "Submission Successful";
+          if (modalText) modalText.textContent = "Great fit. View the masterclass details to continue.";
+          if (masterclassLink) masterclassLink.classList.remove("hidden");
+          if (whatsappChannelLink) whatsappChannelLink.classList.remove("hidden");
+          if (successModalNote) successModalNote.classList.remove("hidden");
+          openWhatsAppChannelAfterDelay();
+        } else {
+          if (modalTitle) modalTitle.textContent = "Application Submitted";
+          if (modalText) modalText.textContent = "Thank you for your interest. We are sorry, but you are not eligible for this programme at the moment.";
+          if (masterclassLink) masterclassLink.classList.add("hidden");
+          if (whatsappChannelLink) whatsappChannelLink.classList.add("hidden");
+          if (successModalNote) successModalNote.classList.add("hidden");
+        }
+        form.reset();
+        resetCustomSelects();
+        updateEarnedThroughArtHowVisibility();
+        closeLoadingModal();
+        successModal.classList.add("is-visible");
+        successModal.setAttribute("aria-hidden", "false");
+      } catch (error) {
+        closeLoadingModal();
+        setStatus("Could not submit right now. Please try again.", "error");
+      } finally {
+        closeLoadingModal();
+        submitBtn.disabled = false;
+      }
+    });
+
+    form.querySelector('select[name="earnedThroughArt"]')?.addEventListener("change", updateEarnedThroughArtHowVisibility);
+    form.querySelector('select[name="region"]')?.addEventListener("change", updateRegionConditionalVisibility);
+    const earnedHowTextarea = form.querySelector('textarea[name="earnedThroughArtHow"]');
+    if (earnedHowTextarea) {
+      earnedHowTextarea.addEventListener("input", () => resizeAutoGrowTextarea(earnedHowTextarea));
+      resizeAutoGrowTextarea(earnedHowTextarea);
+    }
+    updateEarnedThroughArtHowVisibility();
+    updateRegionConditionalVisibility();
+
+    successModalClose.addEventListener("click", closeSuccessModal);
+  </script>
+</body>
+</html>
